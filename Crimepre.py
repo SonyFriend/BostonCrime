@@ -7,19 +7,19 @@ from matplotlib.ticker import MaxNLocator
 import time
 
 data=pd.read_csv("C:/Users/user/Downloads/pythonCode/crime/crime.csv",encoding="gbk")
-data=data.loc[(data['Lat']>35)&(data['Long']< -60)] #remove NA from 'Lat' and 'Long'
+data=data.loc[(data['Lat']>35)&(data['Long']< -60)] #remove NA and -1 from 'Lat' and 'Long'
 data=data.dropna(subset=["STREET"])
 columns=['OFFENSE_CODE_GROUP']
 #for j in columns:
 #	print(j,data[j].unique())
-print(data.isnull().sum())
-type={label: idx for idx, label in enumerate(np.unique(data['OFFENSE_CODE_GROUP']))}
+#print(data.isnull().sum()) #Number of missing value for every columns
+type={label: idx for idx, label in enumerate(np.unique(data['OFFENSE_CODE_GROUP']))} 
 data['type']=data['OFFENSE_CODE_GROUP'].map(type) #change crime type to number
 #print(type)
 index=pd.Index(data['type'])
 #print(index.value_counts().sort_values())
 
-#############################################################################視覺化
+#############################################################################Visualization
 #plt.bar(index.value_counts().index,index.value_counts())
 #plt.xlabel("Crime type")
 #plt.ylabel("Count")
